@@ -67,7 +67,7 @@ header{
 .brand{display:flex;align-items:center;gap:11px;text-decoration:none}
 .brand svg{display:block}
 .brand-name{font-family:var(--serif);font-size:19px;font-weight:700;letter-spacing:.18em;color:var(--text)}
-.brand-sub{display:block;font-family:var(--mono);font-size:8.5px;color:var(--dim);letter-spacing:.22em;margin-top:1px}
+.brand-sub{display:block;font-family:var(--mono);font-size:7.5px;color:var(--dim);letter-spacing:.12em;margin-top:1px;white-space:nowrap}
 nav.gnav{display:flex;gap:4px}
 nav.gnav a{
   text-decoration:none;font-size:12.5px;letter-spacing:.12em;color:var(--dim);
@@ -131,10 +131,12 @@ h2{font-size:clamp(26px,3.4vw,38px);line-height:1.55}
 
 /* ページタイトル帯（下層ページ） */
 .page-hero{
-  padding:172px 28px 70px;max-width:1120px;margin:0 auto;
+  position:relative;padding:172px 28px 96px;max-width:1120px;margin:0 auto;
   border-bottom:1px solid var(--line-soft);
 }
 .page-hero h1{font-size:clamp(32px,4.4vw,50px);line-height:1.5}
+.page-hero ruby{ruby-position:over}
+.page-hero rt{font-family:var(--sans);font-size:.24em;font-weight:500;letter-spacing:.08em;color:#fff}
 .page-hero .lead{margin-top:24px;color:var(--dim);max-width:44em;font-size:15px}
 .crumbs{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);margin-bottom:26px}
 .crumbs a{text-decoration:none;color:var(--bright)}
@@ -142,10 +144,40 @@ h2{font-size:clamp(26px,3.4vw,38px);line-height:1.55}
 
 /* ---------- index: hero ---------- */
 .hero{
+  position:relative;
   min-height:100svh;
   display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);
   align-items:center;gap:30px;
   max-width:1120px;margin:0 auto;padding:150px 28px 90px;
+}
+.scroll-cue{
+  position:absolute;z-index:8;left:50%;bottom:24px;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:var(--bright);font-family:var(--mono);font-size:9px;letter-spacing:.34em;
+  text-indent:.34em;white-space:nowrap;pointer-events:none;
+}
+.scroll-cue::after{
+  content:'';width:1px;height:28px;
+  background:linear-gradient(var(--bright),transparent);
+  animation:scroll-cue-line 2s ease-in-out infinite;
+}
+@keyframes scroll-cue-line{
+  0%,100%{opacity:.28;transform:scaleY(.55);transform-origin:top}
+  50%{opacity:1;transform:scaleY(1);transform-origin:top}
+}
+.page-top-area{
+  display:flex;justify-content:center;padding:68px 28px 62px;
+  border-top:1px solid var(--line-soft);
+}
+.page-top-btn{
+  appearance:none;border:0;background:none;color:var(--bright);cursor:pointer;
+  padding:10px 8px;font-family:var(--mono);font-size:10px;letter-spacing:.24em;
+  text-indent:.24em;text-shadow:0 0 18px rgba(127,160,240,.38);
+  transition:color .3s ease,text-shadow .3s ease,transform .3s ease;
+}
+.page-top-btn:hover,.page-top-btn:focus-visible{
+  color:var(--star);text-shadow:0 0 10px rgba(255,255,255,.5),0 0 28px rgba(127,160,240,.75);
+  transform:translateY(-3px);outline:none;
 }
 .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.32em;color:var(--bright);margin-bottom:26px}
 .eyebrow::before{content:"";display:inline-block;width:34px;height:1px;background:var(--bright);vertical-align:middle;margin-right:14px;opacity:.8}
@@ -169,19 +201,78 @@ h2{font-size:clamp(26px,3.4vw,38px);line-height:1.55}
 .g-rot2{animation:spin 42s linear infinite reverse}
 .g-rot3{animation:spin 60s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.element-tile{
-  position:relative;z-index:2;
+.purpose-wrap{
+  position:relative;z-index:3;display:grid;place-items:center;
   width:min(230px,62vw);aspect-ratio:1/1.12;
-  background:linear-gradient(165deg,rgba(22,36,80,.92),rgba(10,18,44,.92));
-  border:1px solid rgba(127,160,240,.55);
-  box-shadow:
-    0 0 0 1px rgba(127,160,240,.12),
-    0 30px 80px rgba(2,6,20,.8),
-    0 0 60px rgba(62,93,168,.35),
-    inset 0 1px 0 rgba(207,224,255,.12);
-  padding:16px 18px;display:flex;flex-direction:column;
+  perspective:1200px;transform-style:preserve-3d;
   animation:floaty 7s ease-in-out infinite;
 }
+.book-volume{
+  position:absolute;z-index:4;inset:7px -13px -14px 8px;pointer-events:none;
+  border:1px solid rgba(255,217,168,.5);border-radius:2px 8px 9px 2px;
+  background:
+    repeating-linear-gradient(0deg,rgba(220,226,240,.34) 0 1px,rgba(18,29,58,.9) 1px 4px),
+    linear-gradient(145deg,rgba(33,48,83,.98),rgba(7,13,31,.98));
+  box-shadow:8px 10px 0 rgba(3,8,24,.76),12px 15px 30px rgba(0,0,0,.62),0 0 24px rgba(127,160,240,.2);
+  transform:translateZ(-12px);
+  transition:opacity .45s ease .35s,transform 1.6s cubic-bezier(.16,.72,.14,1);
+}
+.book-volume::before{
+  content:'';position:absolute;left:100%;top:5px;width:13px;height:calc(100% - 1px);
+  clip-path:polygon(0 0,100% 9px,100% 100%,0 calc(100% - 9px));
+  background:repeating-linear-gradient(90deg,rgba(230,232,238,.42) 0 1px,rgba(17,27,53,.96) 1px 4px);
+  border-right:1px solid rgba(255,217,168,.36);
+}
+.book-volume::after{
+  content:'';position:absolute;left:7px;top:100%;width:calc(100% - 1px);height:14px;
+  clip-path:polygon(0 0,calc(100% - 13px) 0,100% 100%,13px 100%);
+  background:repeating-linear-gradient(0deg,rgba(230,232,238,.38) 0 1px,rgba(14,23,47,.96) 1px 4px);
+  border-bottom:1px solid rgba(255,217,168,.34);
+}
+.element-tile{
+  position:absolute;z-index:6;inset:0;width:100%;height:100%;
+  background:
+    linear-gradient(90deg,rgba(2,7,24,.88) 0 12px,rgba(127,160,240,.22) 13px,transparent 17px),
+    radial-gradient(circle at 68% 35%,rgba(127,160,240,.2),transparent 42%),
+    linear-gradient(145deg,rgba(25,42,88,.98),rgba(7,15,40,.99));
+  border:1px solid rgba(255,217,168,.72);border-radius:2px 8px 8px 2px;
+  box-shadow:
+    5px 5px 0 rgba(220,224,238,.2),
+    7px 8px 0 rgba(4,9,25,.75),
+    0 30px 80px rgba(2,6,20,.82),
+    0 0 65px rgba(62,93,168,.42),
+    inset 0 0 0 7px rgba(6,13,34,.72),
+    inset 0 0 0 8px rgba(255,217,168,.28);
+  padding:21px 20px 19px 27px;display:flex;flex-direction:column;
+  color:var(--text);font:inherit;text-align:inherit;cursor:pointer;
+  transform-origin:left center;backface-visibility:hidden;transform-style:preserve-3d;
+  transition:transform 1.6s cubic-bezier(.16,.72,.14,1),border-color .45s ease,box-shadow .45s ease,filter .45s ease;
+}
+.element-tile::before{
+  content:'';position:absolute;z-index:1;left:10px;top:8px;bottom:8px;width:8px;
+  border-left:1px solid rgba(255,217,168,.42);border-right:1px solid rgba(255,217,168,.32);
+  background:linear-gradient(90deg,rgba(0,0,0,.56),rgba(127,160,240,.2),rgba(0,0,0,.44));
+  box-shadow:4px 0 10px rgba(0,0,0,.45);
+}
+.element-tile::after{
+  content:'';position:absolute;z-index:1;inset:13px 12px 13px 22px;
+  border:1px solid rgba(255,217,168,.24);border-radius:1px 5px 5px 1px;
+  box-shadow:inset 0 0 22px rgba(127,160,240,.08);pointer-events:none;
+}
+.element-tile>span:not(.purpose-cue){position:relative;z-index:2}
+.element-tile:hover,.element-tile:focus-visible,.purpose-wrap.open .element-tile{
+  border-color:var(--star);outline:none;filter:brightness(1.12);
+  box-shadow:0 0 0 2px rgba(255,217,168,.2),0 30px 80px rgba(2,6,20,.8),0 0 82px rgba(127,160,240,.58),inset 0 1px 0 rgba(255,255,255,.18);
+}
+.purpose-wrap:hover .element-tile,
+.purpose-wrap:focus-within .element-tile,
+.purpose-wrap.open .element-tile{
+  transform:rotateY(-112deg) translateZ(4px);filter:brightness(.9);
+  box-shadow:10px 20px 48px rgba(0,0,0,.6),inset -12px 0 22px rgba(0,0,0,.3);
+}
+.purpose-wrap:hover .book-volume,
+.purpose-wrap:focus-within .book-volume,
+.purpose-wrap.open .book-volume{opacity:.18;transform:translateZ(-18px) scale(.98)}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .et-top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.1em}
 .et-symbol{
@@ -208,9 +299,50 @@ h2{font-size:clamp(26px,3.4vw,38px);line-height:1.55}
 .indot{fill:var(--birth);filter:drop-shadow(0 0 5px rgba(255,217,168,.9))}
 .et-name{font-family:var(--serif);font-size:17px;font-weight:700;letter-spacing:.34em;text-align:center}
 .et-en{font-family:var(--mono);font-size:8.5px;letter-spacing:.26em;color:var(--bright);text-align:center;margin-top:6px}
+.purpose-cue{
+  position:absolute;left:50%;bottom:-40px;transform:translateX(-50%);
+  display:block;white-space:nowrap;padding:0;border:0;background:none;color:#fff4df;
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.3em;
+  text-shadow:0 0 7px #fff,0 0 16px rgba(255,217,168,1),0 0 32px rgba(127,160,240,1),0 0 58px rgba(127,160,240,.9);
+  box-shadow:none;
+  animation:purpose-cue 2s ease-in-out infinite;
+}
+.purpose-cue::before{content:none}
+@keyframes purpose-cue{
+  0%,100%{filter:brightness(1);transform:translateX(-50%) scale(1)}
+  50%{filter:brightness(1.35);transform:translateX(-50%) scale(1.045)}
+}
+.purpose-popover{
+  position:absolute;z-index:4;left:50%;top:50%;
+  width:min(460px,calc(100vw - 40px));max-height:min(500px,72vh);overflow:auto;
+  padding:30px 32px 30px 38px;border:1px solid rgba(255,217,168,.65);
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.38),transparent 20px),
+    linear-gradient(155deg,rgba(20,34,72,.995),rgba(7,14,34,.995));
+  box-shadow:0 28px 90px rgba(0,0,0,.7),0 0 55px rgba(127,160,240,.28);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform-origin:left center;
+  transform:translate(-50%,-50%) scaleX(.38) translateX(28px);
+  transition:opacity .55s ease .45s,visibility .55s ease .45s,transform 1.35s cubic-bezier(.16,.72,.14,1) .28s;
+}
+.purpose-popover::before{
+  content:'';position:absolute;left:10px;top:12px;bottom:12px;width:1px;
+  background:linear-gradient(transparent,rgba(255,217,168,.6) 16%,rgba(255,217,168,.6) 84%,transparent);
+  box-shadow:4px 0 10px rgba(0,0,0,.5);
+}
+.purpose-wrap:hover .purpose-popover,
+.purpose-wrap:focus-within .purpose-popover,
+.purpose-wrap.open .purpose-popover{
+  opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,-50%) scaleX(1) translateX(0);
+}
+.purpose-kicker{margin:0 0 20px;color:var(--birth);font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase}
+.purpose-popover p:not(.purpose-kicker){margin:0 0 14px;color:var(--text);font-size:14px;line-height:1.9;text-align:left}
+.purpose-popover p:last-child{margin-bottom:0}
+.purpose-popover strong{color:var(--star);font-weight:600}
 @media(max-width:900px){
   .hero{grid-template-columns:1fr;padding-top:130px}
-  .element-stage{order:-1;min-height:330px;margin-bottom:-10px}
+  .element-stage{order:-1;min-height:370px;margin-bottom:0}
+  .purpose-popover{padding:24px 22px;max-height:68vh}
 }
 
 /* index: セクション帯 */
@@ -309,6 +441,7 @@ a.svc:focus-visible{outline:2px solid var(--bright);outline-offset:3px}
 .wisdom-context{max-width:920px;margin:76px auto 0;padding:36px 0 0;border-top:1px solid var(--line-soft)}
 .wisdom-context h3{font-family:var(--serif);font-size:clamp(22px,2.6vw,30px);font-weight:700;letter-spacing:.07em;line-height:1.6;margin-bottom:26px;color:var(--text)}
 .wisdom-context p{max-width:52em;margin:0 0 1.35em;color:var(--dim);font-size:14.5px;line-height:2.1}
+.wisdom-context strong{color:var(--text);font-weight:600}
 .wisdom-context .wisdom-question{margin:30px 0 0;padding-left:18px;border-left:2px solid var(--bright);color:var(--star);font-family:var(--serif);font-size:17px;line-height:1.9}
 @media(max-width:900px){.naming-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.wisdom-context{margin-top:54px;padding-top:28px}.wisdom-context p{font-size:14px;line-height:2}}
@@ -355,6 +488,7 @@ a.svc:focus-visible{outline:2px solid var(--bright);outline-offset:3px}
   border-bottom:1px solid var(--line-soft);
 }
 .sd-body li::before{content:"・";position:absolute;left:6px;color:var(--bright)}
+#training .sd-body li .training-highlight{color:#fff;font-weight:600}
 @media(max-width:820px){.svc-detail{grid-template-columns:1fr;gap:28px}}
 
 /* 研修フロー */
@@ -737,7 +871,7 @@ footer{
     </svg>
     <span>
       <span class="brand-name">チテキウム</span>
-      <span class="brand-sub">AI ALIGNMENT DIV.</span>
+      <span class="brand-sub">HUMAN–AI COEXISTENCE DESIGN DIV.</span>
     </span>
   </a>
   <button class="nav-toggle" aria-expanded="false" aria-controls="gnav">MENU</button>
@@ -759,19 +893,15 @@ footer{
   <!-- ================= HERO ================= -->
   <div class="hero">
     <div>
-      <p class="eyebrow">合同会社 ProfeSsions Edge｜AIアライメント事業部</p>
+      <p class="eyebrow">合同会社 ProfeSsions Edge｜AI共生デザイン事業部</p>
       <h1>知が集まる場所から、<br>知恵が生まれる場所へ。<br><span class="glow">そしてその先にあるもの―</span></h1>
       <p class="hero-lead">
-        人とAIの共生を前提に、企業と人が「AIに何を期待し、どう使うか」から考える、AIアライメントを中心としたコンサルティング事業部です。
+        チテキウムは、人とAIの共生を前提に、企業と人が「AIに何を期待し、どう使うか」から考える、AI共生デザインを中心としたコンサルティング事業を行っています。
       </p>
-      <div class="hero-cta">
-        <a class="btn" href="#contact">相談してみる</a>
-        <a class="btn ghost" href="#concept">私たちの視点を読む</a>
-      </div>
     </div>
 
-    <div class="element-stage" aria-hidden="true">
-      <div class="orbits">
+    <div class="element-stage">
+      <div class="orbits" aria-hidden="true">
         <svg viewBox="0 0 440 440">
           <circle class="orbit-ring" cx="220" cy="220" r="155"/>
           <circle class="orbit-ring" cx="220" cy="220" r="192"/>
@@ -784,11 +914,22 @@ footer{
           <g class="infall i3" style="--ia:255deg"><circle class="indot" cx="220" cy="28" r="2.4"/></g>
         </svg>
       </div>
-      <div class="element-tile">
-        <div class="et-top"><span>Ct</span><span>AI&nbsp;Alignment</span></div>
-        <div class="et-symbol">知</div>
-        <div class="et-name">チテキウム</div>
-        <div class="et-en">CHITEKIUM — WHERE KNOWLEDGE GATHERS</div>
+      <div class="purpose-wrap">
+        <span class="book-volume" aria-hidden="true"></span>
+        <button class="element-tile purpose-trigger" type="button" aria-expanded="false" aria-controls="purpose-popover" aria-haspopup="dialog">
+          <span class="et-top"><span>Ct</span></span>
+          <span class="et-symbol">知</span>
+          <span class="et-name">チテキウム</span>
+          <span class="et-en">CHITEKIUM — WHERE KNOWLEDGE GATHERS</span>
+          <span class="purpose-cue" aria-hidden="true">OPEN</span>
+        </button>
+        <div class="purpose-popover" id="purpose-popover" role="dialog" aria-label="Purpose">
+          <p class="purpose-kicker">Purpose</p>
+          <p>チテキウムは、「経営者がAIという補助器を使って、何を実現したいのか」をともに考え、その実行を支援します。</p>
+          <p>私たちが目指すのは、単なるAIツールの導入でも、抽象的な「あるべき論」を語ることでもありません。</p>
+          <p><strong>人が考え、決定し、責任を持つ。AIはその思考と実行を拡張する。</strong></p>
+          <p>その関係を、実際の経営や業務の中に落とし込み、<strong>「人とAIの共生を、理念ではなく実装としてデザイン」</strong>します。それが、チテキウムの役割です。</p>
+        </div>
       </div>
     </div>
   </div>
@@ -822,10 +963,10 @@ footer{
     </div>
     <div class="wisdom-context rv">
       <h3>人類史上最も「叡智」が身近になっている。</h3>
-      <p>人間にとって、情報は非常に価値のあるものです。自分が経験していないことでも、他者の経験を情報として受け取ることができれば、それを自らの判断や問題解決に活かすことができます。だからこそ人類は、情報をより多くの人と、より正確に共有するための技術を発展させてきました。</p>
-      <p>その始まりが「言葉」であり、やがて「文字」によって情報を時間や場所を越えて残せるようになりました。さらに紙や印刷技術によって知識は大量に複製され、図書館に集積されることで、多くの人が共有できるようになります。</p>
-      <p>インターネットは、その知識をデジタル化し、世界中からアクセスできる環境をつくりました。しかし、情報が膨大になるにつれて、今度は「必要な情報をどう見つけるか」が課題となり、検索エンジンが発達します。</p>
-      <p>そして現在、その延長線上にあるのが生成AIです。AIは、膨大な情報の中から必要な内容を探すだけでなく、関係する情報を整理し、人間が理解しやすい形にまとめる役割を担い始めています。技術の進化が、人類が蓄積してきた叡智を、より多くの人が共有し、より使いやすい環境を実現しつつあります。</p>
+      <p>人間にとって、情報は非常に価値のあるものです。自分が経験していないことでも、<strong>他者の経験を情報として受け取ることができれば、それを自らの判断や問題解決に活かすことができます。</strong>だからこそ人類は、情報をより多くの人と、より正確に共有するための技術を発展させてきました。</p>
+      <p>その始まりが<strong>「言葉」</strong>であり、やがて<strong>「文字」</strong>によって情報を時間や場所を越えて残せるようになりました。さらに紙や印刷技術によって知識は大量に複製され、図書館に集積されることで、多くの人が共有できるようになります。</p>
+      <p>インターネットは、その知識をデジタル化し、世界中からアクセスできる環境をつくりました。しかし、情報が膨大になるにつれて、今度は<strong>「必要な情報をどう見つけるか」</strong>が課題となり、検索エンジンが発達します。</p>
+      <p>そして現在、その延長線上にあるのが生成AIです。AIは、膨大な情報の中から必要な内容を探すだけでなく、<strong>関係する情報を整理し、人間が理解しやすい形にまとめる</strong>役割を担い始めています。技術の進化が、人類が蓄積してきた叡智を、より多くの人が共有し、より使いやすい環境を実現しつつあります。</p>
       <p class="wisdom-question">残されたのは「この叡智で何をするか」という、人間に対する「問い」だけです。</p>
     </div>
   </section>
@@ -1036,7 +1177,7 @@ footer{
   <div class="page-hero">
     <p class="crumbs"><a href="#home">HOME</a><span>事業内容</span></p>
     <p class="sec-label">SERVICES</p>
-    <h1>触れて学ぶ。設えて考える。<br>結んでつなぐ。</h1>
+    <h1>触れて学ぶ。<ruby>設<rt>しつら</rt></ruby>えて考える。<br>結んでつなぐ。</h1>
     <p class="lead">
       学びのきっかけを生む「触」、活用を設計する「設」、専門家と結ぶ「結」——チテキウムは、この三つの反応で「AIに関する総合コンサルティング」を提供します。私たち自身はシステム開発を行いません。だからこそ、貴社の側に立った中立的な支援ができます。
     </p>
@@ -1073,7 +1214,7 @@ footer{
           </div>
         </div>
         <ul>
-          <li>企業向け：経営層向けAI概論／全社員向けAIリテラシー研修／部門別の実践ワークショップ</li>
+          <li>企業向け：経営層向けAI概論・<strong class="training-highlight">ケーススタディ型研修</strong>/全社員向けAIリテラシー研修／部門別の実践ワークショップ</li>
           <li>教育機関・自治体向け：公開講座、リカレント教育プログラム、職員研修</li>
           <li>団体向け：業界団体・士業団体での講演、能力維持研修</li>
         </ul>
@@ -2142,6 +2283,28 @@ footer{
     });
   }
 
+  /* ---------- Purposeポップアップ ---------- */
+  const purposeWrap = document.querySelector('.purpose-wrap');
+  const purposeTrigger = document.querySelector('.purpose-trigger');
+  if (purposeWrap && purposeTrigger) {
+    function setPurpose(open) {
+      purposeWrap.classList.toggle('open', open);
+      purposeTrigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    purposeTrigger.addEventListener('click', function () {
+      setPurpose(!purposeWrap.classList.contains('open'));
+    });
+    document.addEventListener('click', function (event) {
+      if (!purposeWrap.contains(event.target)) setPurpose(false);
+    });
+    purposeWrap.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        setPurpose(false);
+        purposeTrigger.focus();
+      }
+    });
+  }
+
   /* ---------- メールアドレスのコピー ---------- */
   const copyBtn = document.getElementById('copy-mail');
   if (copyBtn) {
@@ -2174,6 +2337,32 @@ footer{
   var navLinks = document.querySelectorAll('nav.gnav a');
   var gnav = document.querySelector('nav.gnav');
   var toggleBtn = document.querySelector('.nav-toggle');
+
+  /* ---------- 全ページ共通：SCROLL表示／トップへ戻る ---------- */
+  pages.forEach(function (page) {
+    var firstView = page.querySelector(':scope > .hero, :scope > .page-hero');
+    if (firstView && !firstView.querySelector('.scroll-cue')) {
+      var scrollCue = document.createElement('span');
+      scrollCue.className = 'scroll-cue';
+      scrollCue.setAttribute('aria-hidden', 'true');
+      scrollCue.textContent = 'SCROLL';
+      firstView.appendChild(scrollCue);
+    }
+    if (!page.querySelector(':scope > .page-top-area')) {
+      var topArea = document.createElement('div');
+      topArea.className = 'page-top-area';
+      var topButton = document.createElement('button');
+      topButton.className = 'page-top-btn';
+      topButton.type = 'button';
+      topButton.textContent = '↑ トップに戻る';
+      topButton.addEventListener('click', function () {
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+      });
+      topArea.appendChild(topButton);
+      page.appendChild(topArea);
+    }
+  });
 
   function show(id) {
     var found = false;
