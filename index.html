@@ -84,6 +84,8 @@ nav.gnav a.active::after{
   border:1px solid var(--brand);color:var(--star)!important;margin-left:10px;
 }
 .nav-cta:hover{background:var(--brand)}
+.portal-link{color:var(--bright)!important;margin-left:8px;border-left:1px solid var(--line);padding-left:18px!important;white-space:nowrap}
+.portal-link:hover,.portal-link:focus-visible{color:var(--star)!important}
 
 /* mobile nav */
 .nav-toggle{display:none;background:none;border:1px solid var(--line);color:var(--star);
@@ -97,6 +99,7 @@ nav.gnav a.active::after{
   nav.gnav.open{display:flex}
   nav.gnav a{padding:14px 10px;border-bottom:1px solid var(--line-soft);font-size:14px}
   .nav-cta{margin:14px 0 0;text-align:center;border-bottom:none!important}
+  nav.gnav .portal-link{margin:8px 0 0;padding:14px 10px!important;border-left:none;border:1px solid var(--line);text-align:center}
   .nav-toggle{display:block}
 }
 
@@ -146,7 +149,7 @@ h2{font-size:clamp(26px,3.4vw,38px);line-height:1.55}
 }
 .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.32em;color:var(--bright);margin-bottom:26px}
 .eyebrow::before{content:"";display:inline-block;width:34px;height:1px;background:var(--bright);vertical-align:middle;margin-right:14px;opacity:.8}
-.hero h1{font-size:clamp(36px,5.4vw,62px);line-height:1.45}
+.hero h1{font-size:clamp(34px,3.55vw,45px);line-height:1.45}
 .hero h1 .glow{
   background:linear-gradient(115deg,var(--star) 15%,var(--birth-bright) 60%,var(--birth) 95%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
@@ -212,13 +215,21 @@ h2{font-size:clamp(26px,3.4vw,38px);line-height:1.55}
 
 /* index: セクション帯 */
 .band{border-top:1px solid var(--line-soft)}
-.teaser-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.teaser-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
 .teaser-grid p{color:var(--dim);font-size:15px;margin-bottom:1.5em}
 .teaser-grid p strong{color:var(--text)}
 .pull{
   font-family:var(--serif);font-size:20px;line-height:2;color:var(--text);
   border-left:2px solid var(--bright);padding-left:24px;margin:34px 0;letter-spacing:.05em;
 }
+.concept-question{font-family:var(--serif);font-size:clamp(22px,2.3vw,29px);font-weight:700;line-height:1.55;letter-spacing:.07em;margin-top:8px}
+.teaser-actions{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:28px}
+.implementation-copy{max-width:880px;margin-top:56px;padding-top:28px;border-top:1px solid var(--line-soft)}
+.implementation-copy p{margin:0 0 .9em;line-height:1.8;color:var(--dim);font-size:15px}
+.implementation-copy strong{color:var(--star);font-weight:700}
+.mentoring-note{font-size:14px!important;line-height:1.8;margin-top:-.35em!important}
+.service-summary{margin-bottom:56px}
+.service-summary p{color:var(--dim);max-width:44em;font-size:15px}
 @media(max-width:860px){.teaser-grid{grid-template-columns:1fr;gap:36px}}
 
 /* 方程式パネル */
@@ -227,11 +238,11 @@ h2{font-size:clamp(26px,3.4vw,38px);line-height:1.55}
   backdrop-filter:blur(6px);padding:46px 36px;
   box-shadow:0 24px 60px rgba(2,6,20,.5);
 }
-.formula-row{display:flex;align-items:center;gap:18px;justify-content:center;flex-wrap:wrap}
+.formula-row{display:grid;grid-template-columns:1fr;align-items:center;gap:14px;justify-items:center}
 .f-term{text-align:center}
 .f-term .ft-main{font-family:var(--serif);font-size:18px;font-weight:700;letter-spacing:.08em}
 .f-term .ft-sub{font-family:var(--mono);font-size:9.5px;color:var(--dim);letter-spacing:.14em;margin-top:8px}
-.f-op{font-family:var(--serif);font-size:26px;color:var(--bright)}
+.f-op{font-family:var(--serif);font-size:26px;line-height:1;color:var(--bright)}
 .f-result{margin-top:32px;padding-top:28px;border-top:1px dashed var(--line);text-align:center}
 .f-result .ft-main{font-family:var(--serif);font-size:22px;font-weight:700;letter-spacing:.22em;
   background:linear-gradient(115deg,var(--star) 10%,var(--birth-bright) 65%,var(--birth) 100%);
@@ -268,6 +279,7 @@ a.svc:focus-visible{outline:2px solid var(--bright);outline-offset:3px}
 .cta-band{text-align:center;padding:120px 28px 140px}
 .cta-band h2{margin-bottom:22px}
 .cta-band p{color:var(--dim);max-width:36em;margin:0 auto 42px;font-size:15px}
+.cta-band .cta-copy{text-align:left}
 
 /* ---------- naming(チテキウムとは) ---------- */
 .naming-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
@@ -294,7 +306,12 @@ a.svc:focus-visible{outline:2px solid var(--bright);outline-offset:3px}
   line-height:1.75;margin-bottom:16px;
 }
 .naming-card p{font-size:13.5px;color:var(--dim);line-height:2.05}
+.wisdom-context{max-width:920px;margin:76px auto 0;padding:36px 0 0;border-top:1px solid var(--line-soft)}
+.wisdom-context h3{font-family:var(--serif);font-size:clamp(22px,2.6vw,30px);font-weight:700;letter-spacing:.07em;line-height:1.6;margin-bottom:26px;color:var(--text)}
+.wisdom-context p{max-width:52em;margin:0 0 1.35em;color:var(--dim);font-size:14.5px;line-height:2.1}
+.wisdom-context .wisdom-question{margin:30px 0 0;padding-left:18px;border-left:2px solid var(--bright);color:var(--star);font-family:var(--serif);font-size:17px;line-height:1.9}
 @media(max-width:900px){.naming-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.wisdom-context{margin-top:54px;padding-top:28px}.wisdom-context p{font-size:14px;line-height:2}}
 
 /* ---------- concept ページ ---------- */
 .prose{max-width:760px}
@@ -679,9 +696,12 @@ footer{
 }
 .foot-brand{display:flex;align-items:center;gap:11px;text-decoration:none;margin-bottom:18px}
 .foot-left p{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--dim);line-height:2.1}
+.footer-site{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--bright);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:6px}
+.footer-site:hover,.footer-site:focus-visible{color:var(--star);border-color:var(--bright)}
 .foot-nav{display:grid;grid-template-columns:repeat(2,auto);gap:10px 38px}
 .foot-nav a{font-size:12px;letter-spacing:.1em;color:var(--dim);text-decoration:none;transition:color .25s}
 .foot-nav a:hover{color:var(--star)}
+.foot-nav .portal-link{grid-column:1/-1;margin:8px 0 0;padding:12px 0 0!important;border-left:none;border-top:1px solid var(--line-soft);color:var(--bright)!important}
 .copyright{
   max-width:1120px;margin:0 auto;padding:0 28px 30px;
   font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:rgba(154,169,210,.55);
@@ -729,6 +749,7 @@ footer{
     <a href="#column">コラム</a>
     <a href="#company">会社情報</a>
     <a href="#contact" class="nav-cta">お問い合わせ</a>
+    <a href="https://www.pse-ac.com/" class="portal-link">← グループサイトへ</a>
   </nav>
 </header>
 
@@ -741,7 +762,7 @@ footer{
       <p class="eyebrow">合同会社 ProfeSsions Edge｜AIアライメント事業部</p>
       <h1>知が集まる場所から、<br>知恵が生まれる場所へ。<br><span class="glow">そしてその先にあるもの―</span></h1>
       <p class="hero-lead">
-        チテキウムは、「知的」に、何かが集まる場所を意味する接尾語「-ium」を重ねた名前です。人類の知を学び蓄えたAIという巨大なデジタル図書館を、ただの書庫で終わらせず、知恵を生み、好奇心のままに探索できる広場に変える——人とAIの共生を前提に、企業と人が「AIに何を期待し、どう使うか」から考える、AIの総合コンサルティング事業部です。
+        人とAIの共生を前提に、企業と人が「AIに何を期待し、どう使うか」から考える、AIアライメントを中心としたコンサルティング事業部です。
       </p>
       <div class="hero-cta">
         <a class="btn" href="#contact">相談してみる</a>
@@ -785,49 +806,62 @@ footer{
     <div class="naming-grid">
       <div class="naming-card rv">
         <p class="n-no">01</p>
-        <h3>巨大なデジタル図書館<br>としてのAI</h3>
-        <p>大規模言語モデル（LLM）をはじめとする現代のAIは、人類がこれまでに蓄積してきた膨大な書籍・論文・ウェブ上の知識を学習して作られています。AIそのものが、人類の知を網羅した巨大なデジタル図書館なのです。</p>
+        <h3>知的</h3>
+        <p>AIの基礎となる学習データは、人類がこれまでに蓄積してきた膨大な書籍・論文・ウェブ上の知識。私たちはAIを通じて、先人たちの叡智と向き合っている。</p>
       </div>
       <div class="naming-card rv">
         <p class="n-no">02</p>
-        <h3>「知識の集積所」から<br>「知恵の創出所」へ</h3>
-        <p>従来の図書館は、本や資料を保管する静的な場所でした。そこにAIが掛け合わさることで、集まった知識を引き出し、要約し、新しいアイデアを生み出す——動的な知の空間へと進化します。</p>
+        <h3>テクノロジー</h3>
+        <p>図書館は静的な知の保管場所。AIというテクノロジーは、先人たちの叡智を整理・統合し、私たちに提示する。私たちはAIという動的図書館の入口に立っている。</p>
       </div>
       <div class="naming-card rv">
         <p class="n-no">03</p>
-        <h3>アトリウムのような<br>公共性と遊び心</h3>
-        <p>硬いデータサーバーや業務システムではなく、人々が集まって知的な刺激を受け、好奇心の赴くままに探索できる「知的な遊び場・広場」。それが、チテキウムの目指す世界観です。</p>
+        <h3>-ium</h3>
+        <p>新しい技術、新しい環境を使いこなせるのは、子供がおもちゃで遊ぶような「知的好奇心」。私たちに必要なのは「知のミュージアム」のような「何かが始まる場所」。</p>
       </div>
+    </div>
+    <div class="wisdom-context rv">
+      <h3>人類史上最も「叡智」が身近になっている。</h3>
+      <p>人間にとって、情報は非常に価値のあるものです。自分が経験していないことでも、他者の経験を情報として受け取ることができれば、それを自らの判断や問題解決に活かすことができます。だからこそ人類は、情報をより多くの人と、より正確に共有するための技術を発展させてきました。</p>
+      <p>その始まりが「言葉」であり、やがて「文字」によって情報を時間や場所を越えて残せるようになりました。さらに紙や印刷技術によって知識は大量に複製され、図書館に集積されることで、多くの人が共有できるようになります。</p>
+      <p>インターネットは、その知識をデジタル化し、世界中からアクセスできる環境をつくりました。しかし、情報が膨大になるにつれて、今度は「必要な情報をどう見つけるか」が課題となり、検索エンジンが発達します。</p>
+      <p>そして現在、その延長線上にあるのが生成AIです。AIは、膨大な情報の中から必要な内容を探すだけでなく、関係する情報を整理し、人間が理解しやすい形にまとめる役割を担い始めています。技術の進化が、人類が蓄積してきた叡智を、より多くの人が共有し、より使いやすい環境を実現しつつあります。</p>
+      <p class="wisdom-question">残されたのは「この叡智で何をするか」という、人間に対する「問い」だけです。</p>
     </div>
   </section>
 
   <!-- ================= CONCEPT TEASER ================= -->
   <section class="band">
     <div class="sec-head rv">
-      <p class="sec-label">OUR PERSPECTIVE</p>
-      <h2>AIに「何をさせるか」の前に、<br>人が「何を考えるか」。</h2>
+      <p class="sec-label">SERVICES</p>
+      <h3 class="concept-question">AIに「何をさせるか」の前に、<br>人が「何を望むか」。</h3>
     </div>
     <div class="teaser-grid">
       <div class="rv">
+        <p class="pull">
+          私たちが提供するのは、AIと共生するための「考える力」を前提とした「生成AI」を現場に実装できる力です。
+        </p>
         <p>
           AIは、めがねや望遠鏡と同じ「補助器」です。どれほど高性能でも、<strong>「見たいもの・やりたいこと」という意図</strong>を持たない人には、力を発揮しません。本当に差がつくのは、ツールの操作の手前——AIに何を期待し、どんな課題を任せるのかを<strong>自分の言葉で定義できる力</strong>です。
         </p>
-        <p class="pull">
-          私たちが提供するのは、AIの操作方法ではなく、<br>AIと共生するための「考える力」です。
-        </p>
-        <a class="btn ghost" href="#concept">私たちの視点をくわしく</a>
+        <p class="mentoring-note">以下のメンタリング（パーソナルMBA）は、この経営者の考える力を伸ばすことに特化したプログラムです。</p>
+        <div class="teaser-actions">
+          <a class="btn ghost" href="https://professionsedge.com/#representative" target="_blank" rel="noopener noreferrer">メンタリング（パーソナルMBA）</a>
+          <a class="btn ghost" href="#concept">私たちの視点をくわしく</a>
+        </div>
       </div>
       <div class="formula rv" aria-label="チテキウムの方程式">
         <div class="formula-row">
           <div class="f-term">
-            <div class="ft-main">アカデミックな知見</div>
-            <div class="ft-sub">KURIHARA — 経営学・会計学・科学哲学</div>
+            <div class="ft-main">研究と実務の融合</div>
+            <div class="ft-sub">KURIHARA-経営・組織・AI</div>
           </div>
           <div class="f-op">×</div>
           <div class="f-term">
             <div class="ft-main">最先端のAI実践知</div>
             <div class="ft-sub">TAKAHASHI — 最新ツール・活用研修</div>
           </div>
+          <div class="f-op">×</div>
         </div>
         <div class="f-result">
           <div class="ft-main">チテキウム</div>
@@ -839,8 +873,7 @@ footer{
 
   <!-- ================= SERVICES TEASER ================= -->
   <section class="band">
-    <div class="sec-head rv">
-      <p class="sec-label">SERVICES</p>
+    <div class="service-summary rv">
       <h2>事業内容</h2>
       <p>学びのきっかけを生む「触」、活用を設計する「設」、専門家と結ぶ「結」。AIをめぐる三つの反応を、一気通貫で支援します。</p>
     </div>
@@ -867,6 +900,13 @@ footer{
         <span class="more">VIEW MORE →</span>
       </a>
     </div>
+    <div class="implementation-copy rv">
+      <p>生成AIの業務導入を検討する際に必要なのは、<strong>AIツールに関する情報だけではありません。</strong></p>
+      <p>最も必要なのは、<strong>業務に対する解像度を高め、業務管理の在り方そのものを根本から検討すること</strong>です。</p>
+      <p>システム化とデジタル化の違い。<strong>誰が決定し、その結果について誰が責任を負うのか</strong>という設計。</p>
+      <p>ここまで整理して初めて、生成AIと従来型のアプリケーションを、業務の目的に照らして比較できるようになります。そして、その最後の段階で初めて<strong>「どのAIを使うのか」</strong>というツール選定が意味を持ちます。</p>
+      <p>弊社の強みは、「何をAIにさせるのか」を自ら考えられる力を育てるメンタリングから、業務管理そのものをデザインするコンサルティング、生成AIに関する最先端の知見の提供、さらに必要に応じたシステム開発先の紹介まで、<strong>生成AIの業務導入を一貫して支援できること</strong>です。</p>
+    </div>
   </section>
 
   <!-- ================= MEMBERS TEASER ================= -->
@@ -875,7 +915,7 @@ footer{
       <p class="sec-label">MEMBERS</p>
       <h2>学術と実践、ふたつの軌道。</h2>
       <p>
-        大学教授・税理士としてAIと社会のあり方を研究する栗原と、上場企業をはじめ幅広い法人でAI研修・講演の実績を重ねる髙橋。大学のゼミで師弟として出会ったふたつの知が、いま同じ軌道で交わるところに、チテキウムのコンサルティングがあります。
+        研究者としてAIと社会のあり方を研究する栗原と、上場企業をはじめ幅広い法人でAI研修・講演の実績を重ねる髙橋。大学のゼミで師弟として出会ったふたつの知が、いま同じ軌道で交わるところに、チテキウムのコンサルティングがあります。
       </p>
     </div>
     <div class="rv" style="display:flex;gap:14px;flex-wrap:wrap">
@@ -889,7 +929,7 @@ footer{
     <div class="rv">
       <p class="sec-label center">CONTACT</p>
       <h2>まずは、お話を聞かせてください。</h2>
-      <p>
+      <p class="cta-copy">
         「AIで何ができるのか知りたい」「研修を依頼したい」「漠然とした課題感しかない」——どの段階のご相談でも歓迎します。貴社にとってのAIの意味を、一緒に考えるところから始めましょう。
       </p>
       <a class="btn" href="#contact">お問い合わせはこちら</a>
@@ -1818,7 +1858,7 @@ footer{
     <div class="rv">
       <p class="sec-label center">CONTACT</p>
       <h2>お問い合わせ</h2>
-      <p>講演・研修・コンサルティングのご相談は、お問い合わせフォームからご連絡ください。</p>
+      <p>講演・研修・コンサルティングのご相談は、<br>お問い合わせフォームからご連絡ください。</p>
       <a class="btn" href="#contact">お問い合わせはこちら</a>
     </div>
   </section>
@@ -1885,6 +1925,7 @@ footer{
         <span class="brand-name" style="font-size:16px">チテキウム</span>
       </a>
       <p>合同会社 ProfeSsions Edge — AIアライメント事業部<br>〒330-0053 埼玉県さいたま市浦和区前地3-14-12 1階A</p>
+      <a class="footer-site" href="https://professionsedge.com/" target="_blank" rel="noopener noreferrer">弊社総合サイト</a>
     </div>
     <nav class="foot-nav" aria-label="フッターナビゲーション">
       <a href="#concept">私たちの視点</a>
@@ -1893,6 +1934,7 @@ footer{
       <a href="#column">コラム</a>
       <a href="#company">会社情報</a>
       <a href="#contact">お問い合わせ</a>
+      <a href="https://www.pse-ac.com/" class="portal-link">← グループサイトへ</a>
     </nav>
   </div>
   <p class="copyright">© 2026 ProfeSsions Edge LLC. All rights reserved.</p>
